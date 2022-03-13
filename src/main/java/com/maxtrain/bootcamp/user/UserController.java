@@ -13,16 +13,27 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
 	@Autowired
-	private UserRepository useRepo;
+	private UserRepository userRepo;
+	/*
+	// Login
+	@GetMapping("login {username}/{password}")
+	public ResponseEntity<User> GetByUsernameAndPassword(@PathVariable String username, @PathVariable String password) {
+		var user = userRepo.findByUsernameAndPassword(username, password);
+		if(user.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<User>(user.get(), HttpStatus.OK);
+	}
+	*/
 	
 	@GetMapping // ALL
 	public ResponseEntity<Iterable<User>> getUser() {
-		var user = useRepo.findAll();
+		var user = userRepo.findAll();
 		return new ResponseEntity<Iterable<User>>(user, HttpStatus.OK);
 	}
 	@GetMapping ("{id}") //PK
 	public ResponseEntity<User> getUser(@PathVariable int id) {
-		var user = useRepo.findById(id);
+		var user = userRepo.findById(id);
 		if(user.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);	
 		}
@@ -33,7 +44,7 @@ public class UserController {
 		if (user == null || user.getId() != 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		var use = useRepo.save(user);
+		var use = userRepo.save(user);
 		return new ResponseEntity<User>(use, HttpStatus.CREATED);
 	}
 	@SuppressWarnings("rawtypes")
@@ -42,21 +53,21 @@ public class UserController {
 		if (user == null || user.getId() == 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		var use = useRepo.findById(user.getId());
+		var use = userRepo.findById(user.getId());
 		if(use.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		useRepo.save(user);
+		userRepo.save(user);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
 	public ResponseEntity deleteUser(@PathVariable int id) {
-		var use = useRepo.findById(id);
+		var use = userRepo.findById(id);
 		if (use.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		useRepo.delete(use.get());
+		userRepo.delete(use.get());
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }
