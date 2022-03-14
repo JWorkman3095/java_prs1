@@ -10,94 +10,94 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(columnDefinition="int")
-	private int Id;
+	private int id;
 	@Column(length=30, nullable=false)
-	private String Username;
+	private String username;
 	@Column(length=30, nullable=false)
-	private String Password;
+	private String password;
 	@Column(length=30, nullable=false)
-	private String Firstname;
+	private String firstname;
 	@Column(length=30, nullable=false)
-	private String LastName;
+	private String lastName;
 	@Column(length=12, nullable=true)
-	private String Phone;
+	private String phone;
 	@Column(length=225, nullable=true)
-	private String Email;
-	private boolean IsReview;
-	private boolean IsAdmin;
+	private String email;
+	private boolean isReview;
+	private boolean isAdmin;
 	
 	public User () {}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getUsername() {
-		return Username;
+		return username;
 	}
 
 	public void setUsername(String username) {
-		Username = username;
+		username = username;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		password = password;
 	}
 
 	public String getFirstname() {
-		return Firstname;
+		return firstname;
 	}
 
 	public void setFirstname(String firstname) {
-		Firstname = firstname;
+		firstname = firstname;
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		lastName = lastName;
 	}
 
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 
 	public void setPhone(String phone) {
-		Phone = phone;
+		phone = phone;
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		email = email;
 	}
 
 	public boolean isIsReview() {
-		return IsReview;
+		return isReview;
 	}
 
 	public void setIsReview(boolean isReview) {
-		IsReview = isReview;
+		isReview = isReview;
 	}
 
 	public boolean isIsAdmin() {
-		return IsAdmin;
+		return isAdmin;
 	}
 
 	public void setIsAdmin(boolean isAdmin) {
-		IsAdmin = isAdmin;
+		isAdmin = isAdmin;
 	}
 
 	
