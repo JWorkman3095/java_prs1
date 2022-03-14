@@ -1,12 +1,15 @@
 package com.maxtrain.bootcamp.request;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.maxtrain.bootcamp.requestline.RequestLine;
 import com.maxtrain.bootcamp.user.User;
 
-import antlr.collections.List;
+
 
 @Entity
 public class Request {
@@ -32,13 +35,16 @@ public class Request {
 	@JoinColumn(name="userId")
 	private User user;
 	
-	//@JsonManagedReference
-	//@OneToMany(mappedBy="request")
-	//private List<Requestline> requestlines;
+	@JsonManagedReference
+	@OneToMany(mappedBy="request")
+	private List<RequestLine> requestlines;
 	
-	//public List<Requestline> getRequestlines() {
-	//	return requestlines;
-	//}
+	public List<RequestLine> getRequestlines() {
+		return requestlines;
+	}
+	public void setRequestlines(List<RequestLine> requestlines) {
+		this.requestlines = requestlines;
+	}
 
 	public int getId() {
 		return id;

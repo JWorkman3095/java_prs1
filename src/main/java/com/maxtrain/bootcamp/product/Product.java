@@ -27,8 +27,7 @@ public class Product {
 	@JoinColumn(name="vendorId")
 	private Vendor vendor;
 	
-	public Product() {
-		
+	public Product() {	
 		
 	}
 
