@@ -33,7 +33,7 @@ public class User {
 	}
 
 	public void setId(int id) {
-		id = id;
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -41,7 +41,7 @@ public class User {
 	}
 
 	public void setUsername(String username) {
-		username = username;
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -49,7 +49,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		password = password;
+		this.password = password;
 	}
 
 	public String getFirstname() {
@@ -57,7 +57,7 @@ public class User {
 	}
 
 	public void setFirstname(String firstname) {
-		firstname = firstname;
+		this.firstname = firstname;
 	}
 
 	public String getLastName() {
@@ -65,7 +65,7 @@ public class User {
 	}
 
 	public void setLastName(String lastName) {
-		lastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getPhone() {
@@ -73,7 +73,7 @@ public class User {
 	}
 
 	public void setPhone(String phone) {
-		phone = phone;
+		this.phone = phone;
 	}
 
 	public String getEmail() {
@@ -81,24 +81,23 @@ public class User {
 	}
 
 	public void setEmail(String email) {
-		email = email;
+		this.email = email;
 	}
 
-	public boolean isIsReview() {
+	public boolean isReview() {
 		return isReview;
 	}
 
-	public void setIsReview(boolean isReview) {
-		isReview = isReview;
+	public void setReview(boolean isReview) {
+		this.isReview = isReview;
 	}
 
-	public boolean isIsAdmin() {
+	public boolean isAdmin() {
 		return isAdmin;
 	}
 
-	public void setIsAdmin(boolean isAdmin) {
-		isAdmin = isAdmin;
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
-	
 }
