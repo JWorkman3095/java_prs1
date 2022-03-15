@@ -14,12 +14,13 @@ public class ProductController {
 	@Autowired
 	private ProductRepository prodRepo;
 	
+	// ALL
 	@GetMapping
 	public ResponseEntity<Iterable<Product>> getProducts(){
 		var products = prodRepo.findAll();
 		return new ResponseEntity<Iterable<Product>>(products, HttpStatus.OK);
 	}
-	
+	//PK
 	@GetMapping("{id}")
 	public ResponseEntity<Product> GetById(@PathVariable int id) {
 		var product = prodRepo.findById(id);
@@ -53,7 +54,8 @@ public class ProductController {
 		prodRepo.save(product);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-		
+	
+	// DELETE
 	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
 	public ResponseEntity deleteProduct(@PathVariable int id) {

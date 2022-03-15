@@ -32,7 +32,7 @@ public class RequestController {
 	// GET Review Status
 	@GetMapping("reviews/{userId}")
 	public ResponseEntity<Iterable<Request>> getRequestsInReview(@PathVariable int userId) {
-		var requests = reqRepo.findByUserIdNotAndStatus("REVIEW", userId);
+		var requests = reqRepo.findByStatusAndUserIdNot("REVIEW", userId);
 		return new ResponseEntity<Iterable<Request>>(requests, HttpStatus.OK);
 	}
 	 //Add
@@ -44,7 +44,7 @@ public class RequestController {
 		var requ = reqRepo.save(request);
 		return new ResponseEntity<Request>(requ, HttpStatus.CREATED);
 	}
-	// PUT Status
+	// PUT Review Status
 	@SuppressWarnings("rawtypes")
 	@PutMapping("review/{id}")
 	public ResponseEntity reviewRequest(@PathVariable int id, @RequestBody Request request) {

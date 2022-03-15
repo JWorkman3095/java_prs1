@@ -75,9 +75,8 @@ public class RequestlineController {
 		if(reqlOpt.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		var reql = reqlOpt.get();
-		reqlRepo.save(reql);
-		var respEntity = this.recalcRequestTotal(reql.getRequest().getId());
+		reqlRepo.save(requestline);
+		var respEntity = this.recalcRequestTotal(requestline.getRequest().getId());
 		if(respEntity.getStatusCode() != HttpStatus.OK) {
 			throw new Exception("Recalculation request failed!");
 		}

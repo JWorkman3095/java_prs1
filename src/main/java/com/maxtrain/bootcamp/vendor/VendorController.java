@@ -14,12 +14,14 @@ public class VendorController {
 	@Autowired
 	private VendorRepository vendorRepo;
 	
+	//ALL
 	@GetMapping
 	public ResponseEntity<Iterable<Vendor>> getVendors(){
 		var vendors = vendorRepo.findAll();
 		return new ResponseEntity<Iterable<Vendor>>(vendors, HttpStatus.OK);
 	}
 	
+	//PK
 	@GetMapping("{id}")
 	public ResponseEntity<Vendor> GetById(@PathVariable int id) {
 		var vendor = vendorRepo.findById(id);
@@ -28,7 +30,7 @@ public class VendorController {
 		}
 		return new ResponseEntity<Vendor>(vendor.get(), HttpStatus.OK);
 	}
-	
+	//Code
 	@GetMapping("code/{code}")
 	public ResponseEntity<Vendor> getVendorByCode(@PathVariable String code) {
 		var vendor = vendorRepo.findByCode(code);
