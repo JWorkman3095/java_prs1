@@ -13,11 +13,13 @@ public class RequestController {
 	@Autowired
 	private RequestRepository reqRepo;
 	
-	@GetMapping // ALL
+	// ALL
+	@GetMapping
 	public ResponseEntity<Iterable<Request>> getRequest() {
 		var request = reqRepo.findAll();
 		return new ResponseEntity<Iterable<Request>>(request, HttpStatus.OK);
 	}
+	// PK
 	@GetMapping("{id}")
 	public ResponseEntity<Request> GetById(@PathVariable int id) {
 		var request = reqRepo.findById(id);
@@ -26,12 +28,13 @@ public class RequestController {
 		}
 		return new ResponseEntity<Request>(request.get(), HttpStatus.OK);
 	}
-	// GET Review Status
-	//@GetMapping("/review/{id}")
-	//public list<request> getAllReviewRequests(PathVariable int id) {
-		
-	//}
 	
+	// GET Review Status
+	@GetMapping("reviews/{userId}")
+	public ResponseEntity<Iterable<Request>> getRequestsInReview(@PathVariable int userId) {
+		var requests = reqRepo.findByUserIdNotAndStatus("REVIEW", userId);
+		return new ResponseEntity<Iterable<Request>>(requests, HttpStatus.OK);
+	}
 	 //Add
 	@PostMapping
 	public ResponseEntity<Request> postRequest(@RequestBody Request request) {
@@ -41,6 +44,31 @@ public class RequestController {
 		var requ = reqRepo.save(request);
 		return new ResponseEntity<Request>(requ, HttpStatus.CREATED);
 	}
+	// PUT Status
+	@SuppressWarnings("rawtypes")
+	@PutMapping("review/{id}")
+	public ResponseEntity reviewRequest(@PathVariable int id, @RequestBody Request request) {
+		var status = (request.getTotal() <= 50) ? "APPROVED" : "REVIEW";
+		request.setStatus(status);
+		return putRequest(id, request);
+	}
+	
+	// PUT Approve
+	@SuppressWarnings("rawtypes")
+	@PutMapping("approve/{id}")
+	public ResponseEntity approveRequest(@PathVariable int id, @RequestBody Request request) {
+		request.setStatus("APPROVED");
+		return putRequest(id, request);
+	}
+	
+	// PUT Reject
+	@SuppressWarnings("rawtypes")
+	@PutMapping("reject/{id}")
+	public ResponseEntity rejectRequest(@PathVariable int id, @RequestBody Request request) {
+		request.setStatus("REJECTED");
+		return putRequest(id, request);
+	}
+	
 	// PUT
 	@SuppressWarnings("rawtypes")
 	@PutMapping("{id}")
@@ -55,6 +83,8 @@ public class RequestController {
 		reqRepo.save(request);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
+	// Delete
 	@SuppressWarnings("rawtypes")
 	@DeleteMapping("{id}")
 	public ResponseEntity deleteRequest(@PathVariable int id) {
